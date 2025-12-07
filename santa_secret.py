@@ -84,8 +84,7 @@ def decode_santa_pin(code: str) -> Optional[str]:
         if len(pin_digits) >= PIN_LENGTH:
             break
 
-    # 4. Final Validation and Formatting
-    
+    # Final Validation and Formatting
     if len(pin_digits) < PIN_LENGTH:
         return None
     
