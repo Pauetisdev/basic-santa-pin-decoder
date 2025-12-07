@@ -8,19 +8,19 @@ BLOCK_PATTERN: Final[str] = r'\[(.*?)\]'
 
 # --- Arithmetic Core ---
 
-def _calculate_net_change(operations_str: str) -> int:
+def calculate_net_change(operations_str: str) -> int:
     """Calculates net change: (Count of '+') - (Count of '-')."""
     plus_count: int = operations_str.count('+')
     minus_count: int = operations_str.count('-')
     return plus_count - minus_count
 
-def _apply_modular_arithmetic(initial_digit: int, net_change: int) -> int:
+def apply_modular_arithmetic(initial_digit: int, net_change: int) -> int:
     """Applies arithmetic modulo 10: (digit + change) % 10."""
     return (initial_digit + net_change) % MODULUS
 
 # --- Block Handling Logic ---
 
-def _handle_normal_block(content: str) -> Optional[int]:
+def handle_normal_block(content: str) -> Optional[int]:
     """Processes a standard block (e.g., '3+-') to calculate its final digit."""
     if not content:
         return None
@@ -30,8 +30,8 @@ def _handle_normal_block(content: str) -> Optional[int]:
         initial_digit: int = int(initial_char)
         operations: str = content[1:]
         
-        net_change: int = _calculate_net_change(operations)
-        final_value: int = _apply_modular_arithmetic(initial_digit, net_change)
+        net_change: int = calculate_net_change(operations)
+        final_value: int = apply_modular_arithmetic(initial_digit, net_change)
         
         return final_value
         
@@ -71,7 +71,7 @@ def decode_santa_pin(code: str) -> Optional[str]:
         else:
             try:
                 # Call specialized function to process the arithmetic
-                result_digit: Optional[int] = _handle_normal_block(block_content)
+                result_digit: Optional[int] = handle_normal_block(block_content)
                 
                 if result_digit is not None:
                     pin_digits.append(result_digit)
