@@ -92,3 +92,32 @@ def decode_santa_pin(code: str) -> Optional[str]:
     # Convert list of integers to the final 4-digit string
     final_pin: str = "".join(map(str, pin_digits))
     return final_pin[:PIN_LENGTH]
+
+
+if __name__ == "__main__":
+    def main():
+        """
+        Runs demonstration tests for the PIN decoder.
+        """
+        print("-" * 30)
+        print("Santa's PIN Decoder Demonstration")
+        print("-" * 30)
+        
+        test_cases = {
+            "[1++][2-][3+][<]": "3144",
+            "[9+][0-][4][<]": "0944",
+            "[1+][2-]": None,  # Expected to return None (length < 4)
+            "[]": None,        # Expected to return None (no blocks)
+            "[1][2][3][4][5]": "1234", # Optimization should stop at 4
+            "[5][+][<][<]": None, # Malformed block handled by try/except
+            "[4][0-][<][<]": "4999"
+        }
+        
+        for code, expected in test_cases.items():
+            result = decode_santa_pin(code)
+            status = "PASS" if result == expected else "FAIL"
+            print(f"Code: {code:<20} | Result: {result:<4} | Expected: {expected:<4} | {status}")
+            
+        print("-" * 30)
+        
+    main()
