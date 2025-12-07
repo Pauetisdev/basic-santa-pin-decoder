@@ -116,7 +116,7 @@ if __name__ == "__main__":
         for code, expected in test_cases.items():
             result = decode_santa_pin(code)
             status = "PASS" if result == expected else "FAIL"
-            print(f"Code: {code:<20} | Result: {result:<4} | Expected: {expected:<4} | {status}")
+            print(f"Code: {code:<20} | Result: {str(result):<4} | Expected: {str(expected):<4} | {status}")
             
         print("-" * 30)
         
